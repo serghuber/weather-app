@@ -1,8 +1,6 @@
 const endpoint3 = 'http://api.openweathermap.org/data/2.5/forecast?APPID=7f6619394d62483e856ea81df3979f97&cnt=8&units=metric';
-
-let data2;
-
 let weaterList = [];
+let data2;
 
 function displayInfo2() {
   weaterList.forEach((item, i) => {
@@ -18,10 +16,10 @@ function displayInfo2() {
 
     item.class = (item.time.indexOf('Morning') !== -1 || item.time.indexOf('Day') !== -1) ? 'wi-owm-day-' : 'wi-owm-night-';
 
-    if (item.weather[0].id == 701) {
+    if (item.weather[0].id === 701) {
       icon.classList.remove(icon.classList.item(2));
 
-      if (item.class == 'wi-owm-day-') {
+      if (item.class === 'wi-owm-day-') {
         icon.classList.add('wi-day-fog');
       } else {
         icon.classList.add('wi-night-fog');
@@ -36,9 +34,10 @@ function displayInfo2() {
 }
 
 function parseWeatherData() {
-  let morningWeatherInfo, dayWeatherInfo, eveningWeatherInfo, nightWeatherInfo;
-
-  const currentTime = getLocalTime(gmtOffset).getHours();
+  let morningWeatherInfo;
+  let dayWeatherInfo;
+  let eveningWeatherInfo;
+  let nightWeatherInfo;
 
   data2.forEach((item) => {
     const time = getLocalTime(window.gmtOffset, item.dt);
@@ -48,6 +47,8 @@ function parseWeatherData() {
     if (time.getHours() == 19 || time.getHours() == 20 || time.getHours() == 21 || time.getHours() == 22) eveningWeatherInfo = item;
     if (time.getHours() == 1 || time.getHours() == 2 || time.getHours() == 3 || time.getHours() == 4) nightWeatherInfo = item;
   });
+
+  const currentTime = getLocalTime(gmtOffset).getHours();
 
   if (currentTime >= 0 && currentTime < 7) {
     weaterList[0] = morningWeatherInfo;

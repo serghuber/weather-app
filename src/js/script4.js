@@ -15,9 +15,9 @@ function displayInfo3() {
   data3.forEach((item, i) => {
     const element = document.querySelector(`.content-3 .item-${i+1}`);
     const date = getLocalTime(window.gmtOffset, item.dt);
-    const dt_txt = formatter.format(date);
+    const dateArray = formatter.format(date).split(' ');
 
-    element.querySelector('.day').innerHTML = dt_txt.split(', ')[0] + ', ' + dt_txt.split(', ')[1];
+    element.querySelector('.day').innerHTML = `${dateArray[0]}, ${dateArray[1]} ${dateArray[2]}`;
     element.querySelector('.max-temp').innerHTML = Math.round(item.temp.max);
     element.querySelector('.min-temp').innerHTML = Math.round(item.temp.min);
     element.querySelector('.pressure').innerHTML = Math.round(item.pressure * 0.75);
@@ -33,14 +33,13 @@ function displayInfo3() {
 
     const icon = element.querySelector('.condition-icon');
 
-    if (item.weather[0].id == 701) {
+    if (item.weather[0].id === 701) {
       icon.classList.remove(icon.classList.item(2));
       icon.classList.add('wi-fog');
     } else {
       icon.classList.remove(icon.classList.item(2));
       icon.classList.add('wi-owm-' + item.weather[0].id);
     }
-
   });
 }
 

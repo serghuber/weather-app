@@ -1,15 +1,15 @@
-const gulp = require('gulp'),
-      sourcemaps = require('gulp-sourcemaps'),
-      babel = require('gulp-babel');
-      concat = require('gulp-concat'),
-      uglify = require('gulp-uglify'),
-      prefixer = require('gulp-autoprefixer'),
-      sass = require('gulp-sass'),
-      cssmin = require('gulp-minify-css'),
-      del = require('del'),
-      imagemin = require('gulp-imagemin'),
-      browserSync = require("browser-sync"),
-      reload = browserSync.reload;
+const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const prefixer = require('gulp-autoprefixer');
+const sass = require('gulp-sass');
+const cssmin = require('gulp-minify-css');
+const del = require('del');
+const imagemin = require('gulp-imagemin');
+const browserSync = require("browser-sync");
+const reload = browserSync.reload;
 
 const path = {
   public: {
@@ -39,7 +39,7 @@ const path = {
 
 const config = {
   server: {
-    baseDir: "./"
+    baseDir: "./public"
   },
   tunnel: true,
   host: 'localhost',
@@ -48,7 +48,7 @@ const config = {
 
 gulp.task('webserver', () => browserSync(config));
 
-gulp.task('clean', () => del('public'));
+gulp.task('clean', () => del(['public']));
 
 gulp.task('html:build', () => {
   gulp.src(path.src.html)
@@ -107,15 +107,15 @@ gulp.task('build', [
 ]);
 
 gulp.task('watch', () => {
-  watch([path.watch.html], () => gulp.start('html:build'));
+  gulp.watch([path.watch.html], () => gulp.start('html:build'));
 
-  watch([path.watch.style], () => gulp.start('style:build'));
+  gulp.watch([path.watch.style], () => gulp.start('style:build'));
 
-  watch([path.watch.js], () => gulp.start('js:build'));
+  gulp.watch([path.watch.js], () => gulp.start('js:build'));
 
-  watch([path.watch.img], () => gulp.start('image:build'));
+  gulp.watch([path.watch.img], () => gulp.start('image:build'));
 
-  watch([path.watch.fonts], () => gulp.start('fonts:build'));
+  gulp.watch([path.watch.fonts], () => gulp.start('fonts:build'));
 });
 
-gulp.task('default', ['clean', 'build', 'webserver', 'watch']);
+gulp.task('default', ['build', 'webserver', 'watch']);

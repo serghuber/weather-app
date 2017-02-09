@@ -2,7 +2,6 @@ const endpoint1 = 'https://api.timezonedb.com/v2/get-time-zone?by=position&forma
 const endpoint2 = 'http://api.openweathermap.org/data/2.5/weather?APPID=7f6619394d62483e856ea81df3979f97&units=metric';
 
 window.proxy = 'https://cors-anywhere.herokuapp.com/';
-
 window.latitude = '37.77493';
 window.longitude = '-122.41942';
 
@@ -12,7 +11,7 @@ function changeIcon(sunrise, sunset) {
   const icon = document.querySelector('.content-1 .condition-icon');
 
   if (sunrise > 0 && sunset < 0) {
-    if (data1.weather[0].id == 701) {
+    if (data1.weather[0].id === 701) {
       icon.classList.remove(icon.classList.item(2));
       icon.classList.add('wi-day-fog');
     } else {
@@ -20,7 +19,7 @@ function changeIcon(sunrise, sunset) {
       icon.classList.add('wi-owm-day-' + data1.weather[0].id);
     }
   } else {
-    if (data1.weather[0].id == 701) {
+    if (data1.weather[0].id === 701) {
       icon.classList.remove(icon.classList.item(2));
       icon.classList.add('wi-night-fog');
     } else {
