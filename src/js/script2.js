@@ -55,12 +55,18 @@ function displayInfo1() {
   document.querySelector('.content-1 .date').innerHTML = formatter1.format(getLocalTime(gmtOffset));
   document.querySelector('.content-1 .sunrise').innerHTML = formatter2.format(getLocalTime(gmtOffset, data1.sys.sunrise));
   document.querySelector('.content-1 .sunset').innerHTML = formatter2.format(getLocalTime(gmtOffset, data1.sys.sunset));
-  document.querySelector('.content-1 .current-temp').innerHTML = Math.round(data1.main.temp * 10) / 10;
-  document.querySelector('.content-1 .condition-description').innerHTML = data1.weather[0].description;
+  document.querySelector('.content-1 .current-temp').innerHTML = Math.round(data1.main.temp);
   document.querySelector('.content-1 .humidity').innerHTML = data1.main.humidity;
   document.querySelector('.content-1 .cloudiness').innerHTML = data1.clouds.all;
-  document.querySelector('.content-1 .wind').innerHTML = data1.wind.speed;
+  document.querySelector('.content-1 .wind').innerHTML = Math.round(data1.wind.speed * 10) / 10;
   document.querySelector('.content-1 .pressure').innerHTML = Math.round(data1.main.pressure * 0.75);
+
+  if (data1.weather[0].description.split(' ').length > 2) {
+    data1.weather[0].main = data1.weather[0].main[0].toLowerCase() + data1.weather[0].main.substr(1);
+    document.querySelector('.content-1 .condition-description').innerHTML = data1.weather[0].main;
+  } else {
+    document.querySelector('.content-1 .condition-description').innerHTML = data1.weather[0].description;
+  }
 
   changeIcon(getLocalTime(gmtOffset).valueOf() - getLocalTime(gmtOffset, data1.sys.sunrise).valueOf(),
              getLocalTime(gmtOffset).valueOf() - getLocalTime(gmtOffset, data1.sys.sunset).valueOf());

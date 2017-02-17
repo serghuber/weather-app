@@ -22,7 +22,7 @@ function displayInfo3() {
     element.querySelector('.min-temp').innerHTML = Math.round(item.temp.min);
     element.querySelector('.pressure').innerHTML = Math.round(item.pressure * 0.75);
     element.querySelector('.cloudiness').innerHTML = item.clouds;
-    element.querySelector('.wind').innerHTML = item.speed;
+    element.querySelector('.wind').innerHTML = Math.round(item.speed * 10) / 10;
 
     if (item.weather[0].description.split(' ').length > 2) {
       item.weather[0].main = item.weather[0].main[0].toLowerCase() + item.weather[0].main.substr(1);

@@ -9,10 +9,16 @@ function displayInfo2() {
 
     element.querySelector('.time').innerHTML = item.time;
     element.querySelector('.temp').innerHTML = Math.round(item.main.temp);
-    element.querySelector('.condition-description').innerHTML = item.weather[0].description;
     element.querySelector('.humidity').innerHTML = item.main.humidity;
     element.querySelector('.pressure').innerHTML = Math.round(item.main.pressure * 0.75);
-    element.querySelector('.wind').innerHTML = item.wind.speed;
+    element.querySelector('.wind').innerHTML = Math.round(item.wind.speed * 10) / 10;
+
+    if (item.weather[0].description.split(' ').length > 2) {
+      item.weather[0].main = item.weather[0].main[0].toLowerCase() + item.weather[0].main.substr(1);
+      element.querySelector('.condition-description').innerHTML = item.weather[0].main;
+    } else {
+      element.querySelector('.condition-description').innerHTML = item.weather[0].description;
+    }
 
     item.class = (item.time.indexOf('Morning') !== -1 || item.time.indexOf('Day') !== -1) ? 'wi-owm-day-' : 'wi-owm-night-';
 
