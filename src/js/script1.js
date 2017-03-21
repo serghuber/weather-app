@@ -27,4 +27,4 @@ function handleEnter() {
   }
 }
 
-navItems.forEach(item => item.addEventListener('mouseenter', handleEnter));
+[].slice.call(navItems).forEach(item => item.addEventListener('mouseenter', handleEnter));

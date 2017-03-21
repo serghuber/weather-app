@@ -7,7 +7,6 @@ const prefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass');
 const cssmin = require('gulp-minify-css');
 const del = require('del');
-const imagemin = require('gulp-imagemin');
 const browserSync = require("browser-sync");
 const reload = browserSync.reload;
 
@@ -87,7 +86,6 @@ gulp.task('style:build', () => {
 
 gulp.task('image:build', () => {
   gulp.src(path.src.img)
-    .pipe(imagemin())
     .pipe(gulp.dest(path.public.img))
     .pipe(reload({stream: true}));
 });
